@@ -60,7 +60,7 @@
   width: 0.625em; }
 
 .box:not(:last-child), .title:not(:last-child),
-.subtitle:not(:last-child) {
+.subtitle:not(:last-child), .notification:not(:last-child) {
   margin-bottom: 1.5rem; }
 
 .modal-close {
@@ -1341,6 +1341,78 @@ a.box:active {
     font-size: 1rem; }
   .subtitle.is-7 {
     font-size: 0.75rem; }
+
+.notification {
+  background-color: whitesmoke;
+  border-radius: 4px;
+  position: relative;
+  padding: 1.25rem 2.5rem 1.25rem 1.5rem; }
+  .notification a:not(.button):not(.dropdown-item) {
+    color: currentColor;
+    text-decoration: underline; }
+  .notification strong {
+    color: currentColor; }
+  .notification code,
+  .notification pre {
+    background: white; }
+  .notification pre code {
+    background: transparent; }
+  .notification > .delete {
+    right: 0.5rem;
+    position: absolute;
+    top: 0.5rem; }
+  .notification .title,
+  .notification .subtitle,
+  .notification .content {
+    color: currentColor; }
+  .notification.is-white {
+    background-color: white;
+    color: #0a0a0a; }
+  .notification.is-black {
+    background-color: #0a0a0a;
+    color: white; }
+  .notification.is-light {
+    background-color: whitesmoke;
+    color: rgba(0, 0, 0, 0.7); }
+  .notification.is-dark {
+    background-color: #363636;
+    color: #fff; }
+  .notification.is-primary {
+    background-color: #0D4459;
+    color: #fff; }
+    .notification.is-primary.is-light {
+      background-color: #edf8fc;
+      color: #2eafe0; }
+  .notification.is-link {
+    background-color: #3273dc;
+    color: #fff; }
+    .notification.is-link.is-light {
+      background-color: #eef3fc;
+      color: #2160c4; }
+  .notification.is-info {
+    background-color: #36BEB0;
+    color: #fff; }
+    .notification.is-info.is-light {
+      background-color: #effaf9;
+      color: #258379; }
+  .notification.is-success {
+    background-color: #48c774;
+    color: #fff; }
+    .notification.is-success.is-light {
+      background-color: #effaf3;
+      color: #257942; }
+  .notification.is-warning {
+    background-color: #ffdd57;
+    color: rgba(0, 0, 0, 0.7); }
+    .notification.is-warning.is-light {
+      background-color: #fffbeb;
+      color: #947600; }
+  .notification.is-danger {
+    background-color: #E7624F;
+    color: #fff; }
+    .notification.is-danger.is-light {
+      background-color: #fdefed;
+      color: #b82d19; }
 
 /* Bulma Form */
 .input, .textarea, .select select {

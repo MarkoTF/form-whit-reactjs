@@ -72,40 +72,14 @@ class App extends React.Component {
 
     //console.log(this.state.datos);
     if(camposLlenos) {
-      console.log(this.state.datos);
+      const datosEstilizados = estilizarDatos(this.state.datos);
+      console.log(datosEstilizados);
       this.handleModal();
     } else {
-      const datos = {...this.state.datos};
-      let nuevosDatos = {};
-
-      for(let i = 0; i < e.target.length - 1; i++) {
-	let nombre = e.target[i].name;
-
-	if(e.target[i].value === '') {
-	  nuevosDatos = {
-	    ...nuevosDatos, 
-	    [nombre]: {
-	      contenido: datos.[nombre].contenido,
-	      status: 'vacio'
-	    }
-	  }
-	} else {
-	  nuevosDatos = {
-	    ...nuevosDatos, 
-	    [nombre]: {
-	      contenido: datos.[nombre].contenido,
-	      status: 'lleno'
-	    }
-	  }
-	}
-      }
-
-      //console.log(nuevosDatos);
+      const nuevosDatos = actualizarStatus(this.state.datos, e);
       this.setState({
 	datos: nuevosDatos
       });
-      console.log(this.state.datos);
-      console.log('llenar todos los campos')
     }
 
     e.preventDefault();
@@ -213,12 +187,11 @@ class App extends React.Component {
 	  <Modal 
 	    className={this.state.isModalOpen ? 'modal is-active' : 'modal'}
 	    onClick={this.handleModal}>
-	    <h1 className='title is-3'>Gracias por llenar el formulario!</h1>
-	    <p>Puedes revisar los datos desde la consola del navegador</p>
+	    <h1 className='title is-3'>Gracias por llenar el formulario! 
+	    Puedes revisar los datos desde la consola del navegador</h1>
 	  </Modal>
 
 	</div>
-
       </div>
     );
   }
@@ -231,6 +204,45 @@ function revisarCampos(campos) {
     }
   }
   return true;
+}
+
+function actualizarStatus(datos, e) {
+  let nuevosDatos = {};
+
+  for(let i = 0; i < e.target.length - 1; i++) {
+    let nombre = e.target[i].name;
+
+    if(e.target[i].value === '') {
+      nuevosDatos = {
+	...nuevosDatos, 
+	[nombre]: {
+	  contenido: datos.[nombre].contenido,
+	  status: 'vacio'
+	}
+      }
+    } else {
+      nuevosDatos = {
+	...nuevosDatos, 
+	[nombre]: {
+	  contenido: datos.[nombre].contenido,
+	  status: 'lleno'
+	}
+      }
+    }
+  }
+
+  return nuevosDatos;
+}
+
+function estilizarDatos(datos) {
+  let datosEstilizados = {};
+  Object.entries(datos).forEach(([key, value]) => {
+    datosEstilizados = {
+      ...datosEstilizados,
+      [key]: value.contenido,
+    }
+  });
+  return datosEstilizados;
 }
 
 export default App;
