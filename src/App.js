@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      datos: [{}],
       cliente_nombre: '',
       cliente_opotunidades: '',
       cliente_objetivo_general: '',
@@ -19,11 +20,12 @@ class App extends React.Component {
       marca_identidad_corporativa: '',
       marca_engagement: '',
 
-      isModalOpen: true,
+      isModalOpen: false,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
 
   handleInputChange(e) {
@@ -34,7 +36,16 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
+    if(!this.state.isModalOpen) {
+      this.handleModal();
+    }
     e.preventDefault();
+  }
+
+  handleModal() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
   }
 
   render() {
@@ -114,7 +125,9 @@ class App extends React.Component {
 	    <BtnPrimary type='submit' value='Enviar'/>
 	  </form>
 
-	  <Modal className={this.state.isModalOpen ? 'modal is-active' : 'modal'}>
+	  <Modal 
+	    className={this.state.isModalOpen ? 'modal is-active' : 'modal'}
+	    onClick={this.handleModal}>
 	    <p>Hola</p>
 	  </Modal>
 
