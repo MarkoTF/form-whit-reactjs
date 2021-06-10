@@ -6,6 +6,7 @@ function CuadroContenido(props) {
       </div>
 
       <div className="card-content px-1 py-1">
+       {props.help}
        <textarea 
 	  className="textarea has-fixed-size" 
 	  onChange={props.onChange}

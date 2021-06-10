@@ -10,7 +10,35 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      datos: [{}],
+      // datos:{
+	// cliente_nombre: {
+	  // contenido: '',
+	  // status: 'normal'
+	// },
+	// cliente_nombre: {
+	  // contenido: '',
+	  // status: 'normal'
+	// },
+	// cliente_opotunidades: {
+	  // contenido: '',
+	  // status: 'normal'
+	// },
+	// cliente_objetivo_general: {
+	  // contenido: '',
+	  // status: 'normal'
+	// },
+	// cliente_espectativas: {
+	  // contenido: '',
+	  // status: 'normal'
+	// },
+	// cliente_ventajas: {
+	  // contenido: '',
+	  // status: 'normal'
+	// },
+	// marca_propuesta_valor: '',
+	// marca_identidad_corporativa: '',
+	// marca_engagement: '',
+      // },
       cliente_nombre: '',
       cliente_opotunidades: '',
       cliente_objetivo_general: '',
@@ -36,9 +64,15 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    if(!this.state.isModalOpen) {
+    const camposLlenos = revisarCampos(e.target);
+
+    if(camposLlenos) {
+      console.log(this.state);
       this.handleModal();
+    } else {
+      console.log('llenar todos los campos')
     }
+
     e.preventDefault();
   }
 
@@ -49,6 +83,8 @@ class App extends React.Component {
   }
 
   render() {
+
+    const help = <p className="help is-danger px-3">This email is invalid</p>;
 
     return (
       <div className="App">
@@ -65,6 +101,7 @@ class App extends React.Component {
 	    <div className="box p-5">
 	      <CuadroContenido 
 		name='cliente_nombre'
+		help={help}
 		onChange={this.handleInputChange}
 		encabezado="Nombre del cliente" 
 		descripcion="Descripción breve acerca del cliente, su historia, servicios y productos"/>
@@ -128,7 +165,8 @@ class App extends React.Component {
 	  <Modal 
 	    className={this.state.isModalOpen ? 'modal is-active' : 'modal'}
 	    onClick={this.handleModal}>
-	    <p>Hola</p>
+	    <h1 className='title is-3'>Gracias por llenar el formulario!</h1>
+	    <p>Puedes revisar los datos desde la consola del navegador</p>
 	  </Modal>
 
 	</div>
@@ -136,6 +174,15 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+function revisarCampos(campos) {
+  for(let i = 0; i < campos.length - 1; i++) {
+    if(campos[i].value === '') {
+      return false;
+    }
+  }
+  return true;
 }
 
 export default App;
